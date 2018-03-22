@@ -8,35 +8,60 @@
 
 import UIKit
 import GoogleMaps
+import CoreLocation
+import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate    {
+    
+    var mapView:GMSMapView?
+    let locationManager = CLLocationManager()
 
     override func loadView() {
-        // Create a GMSCameraPosition that tells the map to display the
-        // coordinate -33.86,151.20 at zoom level 6.
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        view = mapView
+        super.loadView()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        let newLocation = GMSCameraPosition.camera(withLatitude: locValue.latitude, longitude: locValue.longitude, zoom: 16)
+        mapView?.animate(to: newLocation)
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Ask for authorization from user
+        self.locationManager.requestAlwaysAuthorization()
+        // For when in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+        let camera = GMSCameraPosition.camera(withLatitude: 0, longitude: 0, zoom: 1.0)
+        mapView = GMSMapView.map(withFrame: CGRect(x: 100, y: 100, width: screenWidth, height: 300), camera: camera)
+        mapView?.center = self.view.center
+        self.view.addSubview(mapView!)
         
         // Creates a marker in the center of the map.
+        /*
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
         marker.title = "Sydney"
         marker.snippet = "Australia"
         marker.map = mapView
+        */
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    // Gets width of screen
+    public var screenWidth: CGFloat {
+        return UIScreen.main.bounds.width
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     
-
+    // Gets height of screen
+    public var screenHeight: CGFloat {
+        return UIScreen.main.bounds.height
+    }
 }
 
