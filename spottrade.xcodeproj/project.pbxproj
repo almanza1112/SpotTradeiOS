@@ -15,6 +15,8 @@
 		637DE96220E2305000B5D430 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DE96120E2305000B5D430 /* PaymentViewController.swift */; };
 		637DE96420E2306600B5D430 /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DE96320E2306600B5D430 /* PersonalViewController.swift */; };
 		637DE96620E2307B00B5D430 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DE96520E2307B00B5D430 /* AboutViewController.swift */; };
+		637DE96820E2F89600B5D430 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DE96720E2F89600B5D430 /* LoginViewController.swift */; };
+		637DE96A20E3018600B5D430 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DE96920E3018600B5D430 /* PhoneNumberViewController.swift */; };
 		63884B5790FEF91CBD09D3CA /* Pods_spottradeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223EC3424300AE3BAA562571 /* Pods_spottradeTests.framework */; };
 		63CB98992061781D00E03874 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB98982061781D00E03874 /* AppDelegate.swift */; };
 		63CB989B2061781D00E03874 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB989A2061781D00E03874 /* ViewController.swift */; };
@@ -56,6 +58,8 @@
 		637DE96120E2305000B5D430 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		637DE96320E2306600B5D430 /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
 		637DE96520E2307B00B5D430 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		637DE96720E2F89600B5D430 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		637DE96920E3018600B5D430 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		63CB98952061781D00E03874 /* spottrade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spottrade.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CB98982061781D00E03874 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63CB989A2061781D00E03874 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 			children = (
 				63CB98C6206189AA00E03874 /* GoogleService-Info.plist */,
 				63CB98982061781D00E03874 /* AppDelegate.swift */,
+				637DE96720E2F89600B5D430 /* LoginViewController.swift */,
 				63CB989A2061781D00E03874 /* ViewController.swift */,
 				637DE95B20E2300B00B5D430 /* YourSpotsViewController.swift */,
 				637DE95D20E2302300B5D430 /* HistoryViewController.swift */,
@@ -144,6 +149,7 @@
 				63CB989F2061781D00E03874 /* Assets.xcassets */,
 				63CB98A12061781D00E03874 /* LaunchScreen.storyboard */,
 				63CB98A42061781D00E03874 /* Info.plist */,
+				637DE96920E3018600B5D430 /* PhoneNumberViewController.swift */,
 			);
 			path = spottrade;
 			sourceTree = "<group>";
@@ -515,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63CB989B2061781D00E03874 /* ViewController.swift in Sources */,
+				637DE96A20E3018600B5D430 /* PhoneNumberViewController.swift in Sources */,
 				637DE95820DC278000B5D430 /* SidebarView.swift in Sources */,
 				637DE96220E2305000B5D430 /* PaymentViewController.swift in Sources */,
 				637DE96420E2306600B5D430 /* PersonalViewController.swift in Sources */,
@@ -522,6 +529,7 @@
 				637DE95E20E2302300B5D430 /* HistoryViewController.swift in Sources */,
 				63CB98992061781D00E03874 /* AppDelegate.swift in Sources */,
 				637DE96620E2307B00B5D430 /* AboutViewController.swift in Sources */,
+				637DE96820E2F89600B5D430 /* LoginViewController.swift in Sources */,
 				637DE95C20E2300B00B5D430 /* YourSpotsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

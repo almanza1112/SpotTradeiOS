@@ -25,12 +25,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor.white]
         UINavigationBar.appearance().tintColor = UIColor(named: "colorAccent")
+        
+        let userDefaults = UserDefaults.standard
         self.window = UIWindow(frame: UIScreen.main.bounds)
         if let window  = self.window {
             window.backgroundColor = UIColor.white
-            
+            var mainView : UIViewController
+            if userDefaults.string(forKey: "logged_in_user_id") == nil {
+                // If there is no UserDefault for logged_in_user_id then start LoginViewController
+                mainView = LoginViewController()
+            } else {
+                // Else, there is a user logged in, proceed to ViewController
+                mainView = ViewController()
+            }
             let nav = UINavigationController()
-            let mainView = ViewController()
             nav.viewControllers = [mainView]
             window.rootViewController = nav
             window.makeKeyAndVisible()
