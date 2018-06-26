@@ -12,6 +12,8 @@ class FeedbackViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Feedback"
+
         self.view.backgroundColor = UIColor.white
     }
 }

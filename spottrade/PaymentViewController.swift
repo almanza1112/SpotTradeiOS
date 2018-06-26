@@ -12,6 +12,7 @@ class PaymentViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Payment"
         self.view.backgroundColor = UIColor.white
     }
 }

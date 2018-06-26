@@ -12,6 +12,8 @@ class PersonalViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Personal"
+
         self.view.backgroundColor = UIColor.white
     }
 }
