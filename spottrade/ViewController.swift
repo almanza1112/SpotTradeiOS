@@ -33,7 +33,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Home"
-        
+        self.navigationController?.navigationBar.barTintColor = UIColor(named: "colorPrimary")
         let btnMenu = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-menu-50"), style: .plain, target: self, action: #selector(btnMenuAction))
         btnMenu.tintColor = UIColor(red: 54/255, green: 55/255, blue: 56/255, alpha: 1.0)
         self.navigationItem.leftBarButtonItem = btnMenu

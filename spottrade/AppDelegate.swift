@@ -21,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyAxgCqHg_WMgTNkBivxM5jpMWIhE4yinz8")
         GMSPlacesClient.provideAPIKey("AIzaSyAxgCqHg_WMgTNkBivxM5jpMWIhE4yinz8")
         
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor.white]
+        UINavigationBar.appearance().tintColor = UIColor(named: "colorAccent")
         self.window = UIWindow(frame: UIScreen.main.bounds)
         if let window  = self.window {
             window.backgroundColor = UIColor.white

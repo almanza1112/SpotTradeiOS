@@ -12,6 +12,7 @@ class YourSpotsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Your Spots"
         self.view.backgroundColor = UIColor.white
         
         self.view.addSubview(lbl)

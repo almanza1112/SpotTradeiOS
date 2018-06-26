@@ -47,7 +47,7 @@ class SidebarView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor(red: 54/255, green: 55/255, blue: 56/255, alpha: 1.0)
+        //self.backgroundColor = UIColor(red: 54/255, green: 55/255, blue: 56/255, alpha: 1.0)
         self.clipsToBounds = true
         
         titleArr = ["Bryant Almanza", "Your Spots", "History", "Feedback", "Payment", "Personal", "About", "Log Out"]
@@ -62,7 +62,7 @@ class SidebarView: UIView, UITableViewDelegate, UITableViewDataSource {
         myTableView.allowsSelection = true
         myTableView.bounces = false
         myTableView.showsVerticalScrollIndicator = false
-        myTableView.backgroundColor = UIColor.clear
+        myTableView.backgroundColor = UIColor.white
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,7 +74,7 @@ class SidebarView: UIView, UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         if indexPath.row == 0 {
-            cell.backgroundColor = UIColor(red: 77/255, green: 77/255, blue: 77/255, alpha: 1.0)
+            cell.backgroundColor = UIColor(named: "colorPrimary")
             let cellImg: UIImageView!
             cellImg = UIImageView(frame: CGRect(x: 15, y: 10, width: 80, height: 80))
             cellImg.layer.cornerRadius = 40
@@ -90,7 +90,7 @@ class SidebarView: UIView, UITableViewDelegate, UITableViewDataSource {
             cellLb1.textColor = UIColor.white
         } else {
             cell.textLabel?.text = titleArr[indexPath.row]
-            cell.textLabel?.textColor = UIColor.white
+            cell.textLabel?.textColor = UIColor.darkText
         }
         return cell
     }
