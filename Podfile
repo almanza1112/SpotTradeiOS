@@ -23,7 +23,7 @@ target 'spottrade' do
   pod 'Alamofire', '~> 4.7'
 
   # Image caching Pod
-  pod 'Kingfisher', '~> 3.0'
+  pod 'Kingfisher', '~> 4.0'
   
   # JSON Parsing Pod
   pod 'SwiftyJSON', '~> 4.0'

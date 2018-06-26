@@ -10,6 +10,8 @@ import UIKit
 import GoogleMaps
 import CoreLocation
 import MapKit
+import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController, CLLocationManagerDelegate    {
     
@@ -65,10 +67,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
         
         // Creates a marker in the center of the map.
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
+        marker.position = CLLocationCoordinate2D(latitude: 40.791179, longitude: -74.139473)
+        marker.title = "Bryant's Home"
+        //marker.snippet = "Australia"
         marker.map = mapView
+        
+        getAvailableSpots(type: "all")
     }
     
     @objc func btnMenuAction() {
@@ -85,6 +89,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
         blackScreen.frame = self.view.bounds
         UIView.animate(withDuration: 0.3) {
             self.sidebarView.frame = CGRect(x: 0, y: 0, width: 0, height: self.sidebarView.frame.height)
+        }
+    }
+    
+    func getAvailableSpots(type: String){
+        Alamofire.request("http://192.168.1.153:3000/location/all?sellerID=all&transaction=available&type=" + type).responseJSON { response in
+            switch response.result {
+            case .success:
+                if let value = response.result.value {
+                    let json =  JSON(value)
+                    
+                    print(json["location"])
+                }
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }
