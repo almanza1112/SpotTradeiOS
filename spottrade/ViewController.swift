@@ -13,6 +13,9 @@ import MapKit
 
 class ViewController: UIViewController, CLLocationManagerDelegate    {
     
+    var sidebarView: SidebarView!
+    var blackScreen: UIView!
+    
     var mapView:GMSMapView?
     let locationManager = CLLocationManager()
 
@@ -29,39 +32,86 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Ask for authorization from user
-        self.locationManager.requestAlwaysAuthorization()
-        // For when in foreground
-        self.locationManager.requestWhenInUseAuthorization()
+        self.title = "SpotTrade"
         
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
-        let camera = GMSCameraPosition.camera(withLatitude: 0, longitude: 0, zoom: 1.0)
-        mapView = GMSMapView.map(withFrame: CGRect(x: 100, y: 100, width: screenWidth, height: 300), camera: camera)
-        mapView?.center = self.view.center
-        self.view.addSubview(mapView!)
+        let btnMenu = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-menu-50"), style: .plain, target: self, action: #selector(btnMenuAction))
+        btnMenu.tintColor = UIColor(red: 54/255, green: 55/255, blue: 56/255, alpha: 1.0)
+        self.navigationItem.leftBarButtonItem = btnMenu
+        
+        sidebarView = SidebarView(frame: CGRect(x: 0, y: 0, width: 0, height: self.view.frame.height))
+        sidebarView.delegate = self
+        sidebarView.layer.zPosition = 100
+        self.view.isUserInteractionEnabled = true
+        self.navigationController?.view.addSubview(sidebarView)
+        
+        blackScreen = UIView(frame: self.view.bounds)
+        blackScreen.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        blackScreen.isHidden = true
+        self.navigationController?.view.addSubview(blackScreen)
+        blackScreen.layer.zPosition = 99
+        let tapGestRecognizer = UITapGestureRecognizer(target: self, action: #selector(blackScreenTapAction(sender:)))
+        blackScreen.addGestureRecognizer(tapGestRecognizer)
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
+        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        view = mapView
         
         // Creates a marker in the center of the map.
-        /*
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
         marker.title = "Sydney"
         marker.snippet = "Australia"
         marker.map = mapView
-        */
     }
     
-    // Gets width of screen
-    public var screenWidth: CGFloat {
-        return UIScreen.main.bounds.width
+    @objc func btnMenuAction() {
+        blackScreen.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.sidebarView.frame = CGRect(x: 0, y: 0, width: 250, height: self.sidebarView.frame.height)
+        }) { (complete) in
+            self.blackScreen.frame = CGRect(x: self.sidebarView.frame.width, y:0, width: self.view.frame.width-self.sidebarView.frame.width, height: self.view.bounds.height + 100)
+        }
     }
     
-    // Gets height of screen
-    public var screenHeight: CGFloat {
-        return UIScreen.main.bounds.height
+    @objc func blackScreenTapAction(sender: UITapGestureRecognizer) {
+        blackScreen.isHidden = true
+        blackScreen.frame = self.view.bounds
+        UIView.animate(withDuration: 0.3) {
+            self.sidebarView.frame = CGRect(x: 0, y: 0, width: 0, height: self.sidebarView.frame.height)
+        }
+    }
+}
+
+extension ViewController: SidebarViewDelegate {
+    func sidebarDidSelectRow(row: Row) {
+        blackScreen.isHidden = true
+        blackScreen.frame = self.view.bounds
+        UIView.animate(withDuration: 0.3) {
+            self.sidebarView.frame = CGRect(x: 0, y: 0, width: 0, height: self.sidebarView.frame.height)
+        }
+        switch row {
+        case .editProfile:
+            let vc = EditProfileVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .messages:
+            print("Messages")
+        case .contact:
+            print("Contatcs")
+        case .settings:
+            print("Settings")
+        case .history:
+            print("History")
+        case .help:
+            print("Help")
+        case .signOut:
+            print("Sign Out")
+        case .none:
+            break
+        }
     }
 }
 

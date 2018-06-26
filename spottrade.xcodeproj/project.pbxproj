@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		02391D6F9D7245F4E8A42439 /* Pods_spottrade.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9012F29601535F5BBB85340 /* Pods_spottrade.framework */; };
+		637DE95820DC278000B5D430 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DE95720DC278000B5D430 /* SidebarView.swift */; };
+		637DE95A20E21DCD00B5D430 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DE95920E21DCC00B5D430 /* EditProfileVC.swift */; };
 		63884B5790FEF91CBD09D3CA /* Pods_spottradeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223EC3424300AE3BAA562571 /* Pods_spottradeTests.framework */; };
 		63CB98992061781D00E03874 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB98982061781D00E03874 /* AppDelegate.swift */; };
 		63CB989B2061781D00E03874 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB989A2061781D00E03874 /* ViewController.swift */; };
@@ -42,6 +44,8 @@
 		223EC3424300AE3BAA562571 /* Pods_spottradeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_spottradeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DD7793E065EE5D6A404919C /* Pods-spottradeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-spottradeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-spottradeTests/Pods-spottradeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		562447D23FE0E59EB5D595F4 /* Pods-spottrade.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-spottrade.debug.xcconfig"; path = "Pods/Target Support Files/Pods-spottrade/Pods-spottrade.debug.xcconfig"; sourceTree = "<group>"; };
+		637DE95720DC278000B5D430 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		637DE95920E21DCC00B5D430 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		63CB98952061781D00E03874 /* spottrade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spottrade.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CB98982061781D00E03874 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63CB989A2061781D00E03874 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 				63CB98C6206189AA00E03874 /* GoogleService-Info.plist */,
 				63CB98982061781D00E03874 /* AppDelegate.swift */,
 				63CB989A2061781D00E03874 /* ViewController.swift */,
+				637DE95920E21DCC00B5D430 /* EditProfileVC.swift */,
+				637DE95720DC278000B5D430 /* SidebarView.swift */,
 				63CB989C2061781D00E03874 /* Main.storyboard */,
 				63CB989F2061781D00E03874 /* Assets.xcassets */,
 				63CB98A12061781D00E03874 /* LaunchScreen.storyboard */,
@@ -476,6 +482,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				63CB989B2061781D00E03874 /* ViewController.swift in Sources */,
+				637DE95820DC278000B5D430 /* SidebarView.swift in Sources */,
+				637DE95A20E21DCD00B5D430 /* EditProfileVC.swift in Sources */,
 				63CB98992061781D00E03874 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
