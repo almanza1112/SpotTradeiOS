@@ -14,24 +14,26 @@ protocol SidebarViewDelegate: class {
 }
 
 enum Row: String {
-    case editProfile
-    case messages
-    case contact
-    case settings
-    case history
-    case help
-    case signOut
+    case Info
+    case YourSpots
+    case History
+    case Feedback
+    case Payment
+    case Personal
+    case About
+    case LogOut
     case none
     
     init(row: Int) {
         switch row {
-        case 0: self = .editProfile
-        case 1: self = .messages
-        case 2: self = .contact
-        case 3: self = .settings
-        case 4: self = .history
-        case 5: self = .help
-        case 6: self = .signOut
+        case 0: self = .Info
+        case 1: self = .YourSpots
+        case 2: self = .History
+        case 3: self = .Feedback
+        case 4: self = .Payment
+        case 5: self = .Personal
+        case 6: self = .About
+        case 7: self = .LogOut
         default: self = .none
         }
     }

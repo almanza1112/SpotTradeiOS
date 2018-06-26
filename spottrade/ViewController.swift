@@ -32,7 +32,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "SpotTrade"
+        self.title = "Home"
         
         let btnMenu = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-menu-50"), style: .plain, target: self, action: #selector(btnMenuAction))
         btnMenu.tintColor = UIColor(red: 54/255, green: 55/255, blue: 56/255, alpha: 1.0)
@@ -93,24 +93,26 @@ extension ViewController: SidebarViewDelegate {
         UIView.animate(withDuration: 0.3) {
             self.sidebarView.frame = CGRect(x: 0, y: 0, width: 0, height: self.sidebarView.frame.height)
         }
+        
         switch row {
-        case .editProfile:
-            let vc = EditProfileVC()
-            self.navigationController?.pushViewController(vc, animated: true)
-        case .messages:
-            print("Messages")
-        case .contact:
-            print("Contatcs")
-        case .settings:
-            print("Settings")
-        case .history:
-            print("History")
-        case .help:
-            print("Help")
-        case .signOut:
+        case .YourSpots:
+            self.navigationController?.pushViewController(YourSpotsViewController(), animated: true)
+        case .History:
+            self.navigationController?.pushViewController(HistoryViewController(), animated: true)
+        case .Feedback:
+            self.navigationController?.pushViewController(FeedbackViewController(), animated: true)
+        case .Payment:
+             self.navigationController?.pushViewController(PaymentViewController(), animated: true)
+        case .Personal:
+            self.navigationController?.pushViewController(PersonalViewController(), animated: true)
+        case .About:
+            self.navigationController?.pushViewController(AboutViewController(), animated: true)
+        case .LogOut:
             print("Sign Out")
         case .none:
             break
+        case .Info:
+            print("info")
         }
     }
 }
