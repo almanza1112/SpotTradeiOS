@@ -27,6 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor(named: "colorAccent")
         
         let userDefaults = UserDefaults.standard
+        userDefaults.set("5b2248c2d118c83a5f0293be", forKey: "logged_in_user_id")
+        userDefaults.set("Bryant", forKey: "logged_in_user_first_name")
+        userDefaults.set("Almanza", forKey: "logged_in_user_last_name")
+        userDefaults.set("almanza1112@gmail.com", forKey: "logged_in_user_email")
+        userDefaults.set("+12014671007", forKey: "logged_in_user_phone_number")
+        userDefaults.set("https://firebasestorage.googleapis.com/v0/b/spottrade-171321.appspot.com/o/Photos%2F5b2248c2d118c83a5f0293be%2FJPEG_20180614_065145_7353346688552332810.jpg?alt=media&token=077461a0-30cd-4220-b423-536ea6b5c1c0", forKey: "logged_in_user_photo_url")
         self.window = UIWindow(frame: UIScreen.main.bounds)
         if let window  = self.window {
             window.backgroundColor = UIColor.white
