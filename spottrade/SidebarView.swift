@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 protocol SidebarViewDelegate: class {
     func sidebarDidSelectRow(row: Row)
@@ -50,7 +51,9 @@ class SidebarView: UIView, UITableViewDelegate, UITableViewDataSource {
         //self.backgroundColor = UIColor(red: 54/255, green: 55/255, blue: 56/255, alpha: 1.0)
         self.clipsToBounds = true
         
-        titleArr = ["Bryant Almanza", "Your Spots", "History", "Feedback", "Payment", "Personal", "About", "Log Out"]
+        let ud = UserDefaults.standard
+        let name = ud.string(forKey: "logged_in_user_first_name")! + " " + ud.string(forKey: "logged_in_user_last_name")!
+        titleArr = [name, "Your Spots", "History", "Feedback", "Payment", "Personal", "About", "Log Out"]
         
         setupViews()
         
@@ -81,7 +84,9 @@ class SidebarView: UIView, UITableViewDelegate, UITableViewDataSource {
             cellImg.layer.masksToBounds = true
             cellImg.contentMode = .scaleAspectFill
             cellImg.layer.masksToBounds = true
-            cellImg.image = #imageLiteral(resourceName: "icons8-menu-50")
+            let url = URL(string: UserDefaults.standard.string(forKey: "logged_in_user_photo_url")!)
+            cellImg.kf.setImage(with: url)
+            //cellImg.image = #imageLiteral(resourceName: "icons8-menu-50")
             cell.addSubview(cellImg)
             let cellLb1 = UILabel(frame: CGRect(x: 110, y: cell.frame.height/2-15, width: 250, height: 30))
             cell.addSubview(cellLb1)
