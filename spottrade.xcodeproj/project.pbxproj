@@ -115,6 +115,7 @@
 		637DE96C20E561E400B5D430 /* login */ = {
 			isa = PBXGroup;
 			children = (
+				637DE96720E2F89600B5D430 /* LoginViewController.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -167,7 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				637DE96920E3018600B5D430 /* PhoneNumberViewController.swift */,
-				637DE96720E2F89600B5D430 /* LoginViewController.swift */,
 				637DE96D20E5623B00B5D430 /* sidebarMenu */,
 				637DE96C20E561E400B5D430 /* login */,
 				637DE96B20E3542D00B5D430 /* spottrade.entitlements */,
