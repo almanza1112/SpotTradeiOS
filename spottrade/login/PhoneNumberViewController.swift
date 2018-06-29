@@ -14,6 +14,10 @@ class PhoneNumberViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Phone Number"
         self.view.backgroundColor = UIColor.white
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "done_black"), style: .plain, target: self, action: #selector(authPhoneNumber))
+    }
+    
+    @objc func authPhoneNumber(){
         
     }
 }

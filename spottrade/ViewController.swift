@@ -18,12 +18,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
     var sidebarView: SidebarView!
     var blackScreen: UIView!
     
-    var mapView:GMSMapView?
+    var mapView: GMSMapView?
+    var marker: GMSMarker?
     let locationManager = CLLocationManager()
-
-    override func loadView() {
-        super.loadView()
-    }
+    
+    var latArr: [Double] = []
+    var lngArr: [Double] = []
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
@@ -36,10 +36,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
         super.viewDidLoad()
         self.title = "Home"
         self.navigationController?.navigationBar.barTintColor = UIColor(named: "colorPrimary")
-        let btnMenu = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-menu-50"), style: .plain, target: self, action: #selector(btnMenuAction))
-        //btnMenu.tintColor = UIColor(red: 54/255, green: 55/255, blue: 56/255, alpha: 1.0)
-        btnMenu.tintColor = UIColor(named: "colorAccent")
-        self.navigationItem.leftBarButtonItem = btnMenu
+        
+        let bMenu = UIBarButtonItem(image: UIImage(named: "menu_black"), style: .plain, target: self, action: #selector(bMenuAction))
+        bMenu.tintColor = UIColor(named: "colorAccent")
+        
+        let bCreateSpot = UIBarButtonItem(image: UIImage(named: "add_black"), style: .plain, target: self, action: #selector(bCreateSpotAction))
+        bCreateSpot.tintColor = UIColor(named: "colorAccent")
+        
+        let bFilter = UIBarButtonItem(image: UIImage(named: "filter_black"), style: .plain, target: self, action: #selector(bFilterAction))
+        bFilter.tintColor = UIColor(named: "colorAccent")
+        
+        self.navigationItem.leftBarButtonItem = bMenu
+        self.navigationItem.rightBarButtonItems = [bCreateSpot, bFilter]
         
         sidebarView = SidebarView(frame: CGRect(x: 0, y: 0, width: 0, height: self.view.frame.height))
         sidebarView.delegate = self
@@ -56,27 +64,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
         blackScreen.addGestureRecognizer(tapGestRecognizer)
         
         let searchController = UISearchController(searchResultsController: nil)
+        UISearchBar.appearance().tintColor = UIColor(named: "colorAccent")
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
-        mapView.settings.rotateGestures = false
+        let camera = GMSCameraPosition.camera(withLatitude: 40.791345, longitude: -74.139406, zoom: 16)
+        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        mapView?.isMyLocationEnabled = true
+        mapView?.settings.myLocationButton = true
+        mapView?.settings.rotateGestures = false
         view = mapView
-        
-        // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: 40.791179, longitude: -74.139473)
-        marker.title = "Bryant's Home"
-        //marker.snippet = "Australia"
-        marker.map = mapView
         
         getAvailableSpots(type: "all")
     }
     
-    @objc func btnMenuAction() {
+    @objc func bMenuAction() {
         blackScreen.isHidden = false
         UIView.animate(withDuration: 0.3, animations: {
             self.sidebarView.frame = CGRect(x: 0, y: 0, width: 250, height: self.sidebarView.frame.height)
@@ -93,14 +95,34 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
         }
     }
     
+    @objc func bCreateSpotAction() {
+        self.navigationController?.pushViewController(CreateSpotViewController(), animated: true)
+    }
+    
+    @objc func bFilterAction() {
+        
+    }
+    
     func getAvailableSpots(type: String){
         Alamofire.request("http://192.168.1.153:3000/location/all?sellerID=all&transaction=available&type=" + type).responseJSON { response in
             switch response.result {
             case .success:
                 if let value = response.result.value {
                     let json =  JSON(value)
+                    for (index,subJson):(String, JSON) in json["location"] {
+                        let marker = GMSMarker()
+                        var latitude : Double
+                        var longitude : Double
+                        var title : String
                     
-                    print(json["location"])
+                        latitude = subJson["latitude"].doubleValue
+                        longitude = subJson["longitude"].doubleValue
+                        title = subJson["name"].stringValue
+                        
+                        marker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                        marker.title = title
+                        marker.map = self.mapView
+                    }
                 }
             case .failure(let error):
                 print(error)

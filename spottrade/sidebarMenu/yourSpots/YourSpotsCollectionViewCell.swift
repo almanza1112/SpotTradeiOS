@@ -29,7 +29,7 @@ class YourSpotsCollectionViewCell: UICollectionViewCell {
         
         // autoLayout imageView
         stackView.addArrangedSubview(ivStaticMap)
-        ivStaticMap.image = #imageLiteral(resourceName: "icons8-menu-50.png")
+        ivStaticMap.image = UIImage(named: "done_black")
         ivStaticMap.translatesAutoresizingMaskIntoConstraints = false
         ivStaticMap.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 2.0/3.0).isActive = true
         

@@ -18,6 +18,8 @@
 		637DE96820E2F89600B5D430 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DE96720E2F89600B5D430 /* LoginViewController.swift */; };
 		637DE96A20E3018600B5D430 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DE96920E3018600B5D430 /* PhoneNumberViewController.swift */; };
 		637DE97220E563FC00B5D430 /* YourSpotsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DE97120E563FC00B5D430 /* YourSpotsCollectionViewCell.swift */; };
+		637DE97520E5D12F00B5D430 /* CreateSpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DE97320E5D12F00B5D430 /* CreateSpotViewController.swift */; };
+		637DE97620E5D12F00B5D430 /* CreateSpotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637DE97420E5D12F00B5D430 /* CreateSpotViewController.xib */; };
 		63884B5790FEF91CBD09D3CA /* Pods_spottradeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223EC3424300AE3BAA562571 /* Pods_spottradeTests.framework */; };
 		63CB98992061781D00E03874 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB98982061781D00E03874 /* AppDelegate.swift */; };
 		63CB989B2061781D00E03874 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB989A2061781D00E03874 /* ViewController.swift */; };
@@ -63,6 +65,8 @@
 		637DE96920E3018600B5D430 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		637DE96B20E3542D00B5D430 /* spottrade.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = spottrade.entitlements; sourceTree = "<group>"; };
 		637DE97120E563FC00B5D430 /* YourSpotsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourSpotsCollectionViewCell.swift; sourceTree = "<group>"; };
+		637DE97320E5D12F00B5D430 /* CreateSpotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSpotViewController.swift; sourceTree = "<group>"; };
+		637DE97420E5D12F00B5D430 /* CreateSpotViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateSpotViewController.xib; sourceTree = "<group>"; };
 		63CB98952061781D00E03874 /* spottrade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spottrade.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CB98982061781D00E03874 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63CB989A2061781D00E03874 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 				63CB989F2061781D00E03874 /* Assets.xcassets */,
 				63CB98A12061781D00E03874 /* LaunchScreen.storyboard */,
 				63CB98A42061781D00E03874 /* Info.plist */,
+				637DE97320E5D12F00B5D430 /* CreateSpotViewController.swift */,
+				637DE97420E5D12F00B5D430 /* CreateSpotViewController.xib */,
 			);
 			path = spottrade;
 			sourceTree = "<group>";
@@ -346,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63CB98A32061781D00E03874 /* LaunchScreen.storyboard in Resources */,
+				637DE97620E5D12F00B5D430 /* CreateSpotViewController.xib in Resources */,
 				63CB98C7206189AA00E03874 /* GoogleService-Info.plist in Resources */,
 				63CB98A02061781D00E03874 /* Assets.xcassets in Resources */,
 				63CB989E2061781D00E03874 /* Main.storyboard in Resources */,
@@ -555,6 +562,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63CB989B2061781D00E03874 /* ViewController.swift in Sources */,
+				637DE97520E5D12F00B5D430 /* CreateSpotViewController.swift in Sources */,
 				637DE97220E563FC00B5D430 /* YourSpotsCollectionViewCell.swift in Sources */,
 				637DE96A20E3018600B5D430 /* PhoneNumberViewController.swift in Sources */,
 				637DE95820DC278000B5D430 /* SidebarView.swift in Sources */,
