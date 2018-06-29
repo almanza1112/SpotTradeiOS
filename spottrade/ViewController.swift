@@ -37,7 +37,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
         self.title = "Home"
         self.navigationController?.navigationBar.barTintColor = UIColor(named: "colorPrimary")
         let btnMenu = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-menu-50"), style: .plain, target: self, action: #selector(btnMenuAction))
-        btnMenu.tintColor = UIColor(red: 54/255, green: 55/255, blue: 56/255, alpha: 1.0)
+        //btnMenu.tintColor = UIColor(red: 54/255, green: 55/255, blue: 56/255, alpha: 1.0)
+        btnMenu.tintColor = UIColor(named: "colorAccent")
         self.navigationItem.leftBarButtonItem = btnMenu
         
         sidebarView = SidebarView(frame: CGRect(x: 0, y: 0, width: 0, height: self.view.frame.height))
