@@ -25,6 +25,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
     var latArr: [Double] = []
     var lngArr: [Double] = []
     
+    var filterTypeSelected = "all"
+    var filterCategorySelected = "all"
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         let newLocation = GMSCameraPosition.camera(withLatitude: locValue.latitude, longitude: locValue.longitude, zoom: 16)
@@ -43,7 +46,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
         let bCreateSpot = UIBarButtonItem(image: UIImage(named: "add_black"), style: .plain, target: self, action: #selector(bCreateSpotAction))
         bCreateSpot.tintColor = UIColor(named: "colorAccent")
         
-        let bFilter = UIBarButtonItem(image: UIImage(named: "filter_black"), style: .plain, target: self, action: #selector(bFilterAction))
+        let bFilter = UIBarButtonItem(image: UIImage(named: "filter_black"), style: .plain, target: self, action: #selector(bFilterSpots))
         bFilter.tintColor = UIColor(named: "colorAccent")
         
         self.navigationItem.leftBarButtonItem = bMenu
@@ -75,7 +78,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
         mapView?.settings.rotateGestures = false
         view = mapView
         
-        getAvailableSpots(type: "all")
+        getAvailableSpots(type: filterTypeSelected, category: filterCategorySelected)
     }
     
     @objc func bMenuAction() {
@@ -99,12 +102,107 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
         self.navigationController?.pushViewController(CreateSpotViewController(), animated: true)
     }
     
-    @objc func bFilterAction() {
+    @objc func bFilterSpots() {
+        let alert = UIAlertController(title: "Filter Spots", message: nil, preferredStyle: .alert)
+        let type = UIAlertAction(title: "Type", style: .default) { (action) in
+            self.filterType()
+        }
+        let category = UIAlertAction(title: "Category", style: .default) { (action) in
+            self.filterCategory()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }
         
+        alert.view.tintColor = UIColor(named: "colorAccent")
+        alert.addAction(type)
+        alert.addAction(category)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
     }
     
-    func getAvailableSpots(type: String){
-        Alamofire.request("http://192.168.1.153:3000/location/all?sellerID=all&transaction=available&type=" + type).responseJSON { response in
+    private func filterType(){
+        let alertController = UIAlertController(title: "Filter Type", message: nil, preferredStyle: .alert)
+        let sellAction = UIAlertAction(title: "Sell", style: .default) { (action) in
+            self.filterTypeSelected = "Sell"
+            self.getAvailableSpots(type: self.filterTypeSelected, category: self.filterCategorySelected)
+        }
+        let requestAction = UIAlertAction(title: "Request", style: .default) { (action) in
+            self.filterTypeSelected = "Request"
+            self.getAvailableSpots(type: self.filterTypeSelected, category: self.filterCategorySelected)
+        }
+        let allAction = UIAlertAction(title: "All", style: .default) { (action) in
+            self.filterTypeSelected = "all"
+            self.getAvailableSpots(type: self.filterTypeSelected, category: self.filterCategorySelected)
+        }
+        let cancelAction = UIAlertAction(title : "Cancel", style: .destructive) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.view.tintColor = UIColor(named: "colorAccent")
+        alertController.addAction(sellAction)
+        alertController.addAction(requestAction)
+        alertController.addAction(allAction)
+        alertController.addAction(cancelAction)
+        
+        var typeActionSelected : UIAlertAction
+        
+        switch filterTypeSelected {
+        case "all":
+            typeActionSelected = allAction
+        case "Sell":
+            typeActionSelected = sellAction
+        case "Request":
+            typeActionSelected = requestAction
+        default:
+            typeActionSelected = allAction
+        }
+        alertController.preferredAction = typeActionSelected
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func filterCategory(){
+        let alertController = UIAlertController(title: "Filter Category", message: nil, preferredStyle: .alert)
+        let regularAction = UIAlertAction(title: "Regular", style: .default) { (action) in
+            self.filterCategorySelected = "Regular"
+            self.getAvailableSpots(type: self.filterTypeSelected, category: self.filterCategorySelected)
+        }
+        let parkingAction = UIAlertAction(title: "Parking", style: .default) { (action) in
+            self.filterCategorySelected = "Parking"
+            self.getAvailableSpots(type: self.filterTypeSelected, category: self.filterCategorySelected)
+        }
+        let allAction = UIAlertAction(title: "All", style: .default) { (action) in
+            self.filterCategorySelected = "all"
+            self.getAvailableSpots(type: self.filterTypeSelected, category: self.filterCategorySelected)
+        }
+        let cancelAction = UIAlertAction(title : "Cancel", style: .destructive) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.view.tintColor = UIColor(named: "colorAccent")
+        alertController.addAction(regularAction)
+        alertController.addAction(parkingAction)
+        alertController.addAction(allAction)
+        alertController.addAction(cancelAction)
+        
+        var categoryActionSelected : UIAlertAction
+        
+        switch filterCategorySelected {
+        case "all":
+            categoryActionSelected = allAction
+        case "Regular":
+            categoryActionSelected = regularAction
+        case "Parking":
+            categoryActionSelected = parkingAction
+        default:
+            categoryActionSelected = allAction
+        }
+        
+        alertController.preferredAction = categoryActionSelected
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func getAvailableSpots(type: String, category : String){
+        Alamofire.request("http://192.168.1.153:3000/location/all?sellerID=all&transaction=available&type=" + type + "&category=" + category).responseJSON { response in
             switch response.result {
             case .success:
                 if let value = response.result.value {
@@ -153,7 +251,10 @@ extension ViewController: SidebarViewDelegate {
         case .About:
             self.navigationController?.pushViewController(AboutViewController(), animated: true)
         case .LogOut:
-            print("Sign Out")
+            let alert = UIAlertController(title: "Log Out", message: "Are you sure you want to log out?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
         case .none:
             break
         case .Info:

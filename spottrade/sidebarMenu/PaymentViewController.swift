@@ -17,6 +17,8 @@ class PaymentViewController: UIViewController {
         self.title = "Payment"
         self.view.backgroundColor = UIColor.white
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "add_black"), style: .plain, target: self, action: #selector(addPaymentMethod))
+        
         getPaymentMethods()
     }
     
@@ -37,5 +39,9 @@ class PaymentViewController: UIViewController {
                 print(error)
             }
         }
+    }
+    
+    @objc func addPaymentMethod(){
+        
     }
 }
