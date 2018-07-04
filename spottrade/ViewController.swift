@@ -283,6 +283,7 @@ extension ViewController: GMSAutocompleteResultsViewControllerDelegate {
         // Do something with the selected place.
         let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 16)
         mapView?.animate(to: camera)
+        searchController?.searchBar.text = place.name
         
         print("Place name: \(place.name)")
         print(place.coordinate.latitude)
