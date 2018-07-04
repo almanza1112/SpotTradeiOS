@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 import CoreLocation
 import MapKit
 import Alamofire
@@ -15,6 +16,10 @@ import SwiftyJSON
 
 class ViewController: UIViewController, CLLocationManagerDelegate    {
     
+    var resultsViewController: GMSAutocompleteResultsViewController?
+    var searchController: UISearchController?
+    var resultView: UITextView?
+
     var sidebarView: SidebarView!
     var blackScreen: UIView!
     
@@ -39,6 +44,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
         super.viewDidLoad()
         self.title = "Home"
         self.navigationController?.navigationBar.barTintColor = UIColor(named: "colorPrimary")
+        
+        resultsViewController = GMSAutocompleteResultsViewController()
+        resultsViewController?.delegate = self
+        
+        self.searchController = UISearchController(searchResultsController: resultsViewController)
+        searchController?.searchResultsUpdater = resultsViewController
+        UISearchBar.appearance().tintColor = UIColor(named: "colorAccent")
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white]
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        definesPresentationContext = true
         
         let bMenu = UIBarButtonItem(image: UIImage(named: "menu_black"), style: .plain, target: self, action: #selector(bMenuAction))
         bMenu.tintColor = UIColor(named: "colorAccent")
@@ -65,11 +82,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate    {
         blackScreen.layer.zPosition = 99
         let tapGestRecognizer = UITapGestureRecognizer(target: self, action: #selector(blackScreenTapAction(sender:)))
         blackScreen.addGestureRecognizer(tapGestRecognizer)
-        
-        let searchController = UISearchController(searchResultsController: nil)
-        UISearchBar.appearance().tintColor = UIColor(named: "colorAccent")
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
         
         let camera = GMSCameraPosition.camera(withLatitude: 40.791345, longitude: -74.139406, zoom: 16)
         mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
@@ -260,6 +272,37 @@ extension ViewController: SidebarViewDelegate {
         case .Info:
             print("info")
         }
+    }
+}
+
+// Handle the user's selection.
+extension ViewController: GMSAutocompleteResultsViewControllerDelegate {
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
+                           didAutocompleteWith place: GMSPlace) {
+        searchController?.isActive = false
+        // Do something with the selected place.
+        let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 16)
+        mapView?.animate(to: camera)
+        
+        print("Place name: \(place.name)")
+        print(place.coordinate.latitude)
+        print(place.coordinate.longitude)
+        print(place.formattedAddress!)
+    }
+    
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
+                           didFailAutocompleteWithError error: Error){
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
 
