@@ -34,6 +34,7 @@ class HistoryViewController: UIViewController {
                     
                     if json["status"] == "success" {
                         print(json["location"])
+                        
                     } else {
                         print(json["reason"])
                     }
